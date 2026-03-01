@@ -120,6 +120,94 @@ ModerationService --> DB
 
 ---
 ---
+## Part 2 — Sequence Diagram  
+### Scenario: User sends message to group, one user offline
+
+```mermaid
+sequenceDiagram
+
+participant U1 as User1
+participant API as Backend API
+participant MS as Message Service
+participant Q as Queue
+participant D as Delivery Service
+participant DB as Database
+participant U2 as User2 (Online)
+participant U3 as User3 (Offline)
+
+U1->>API: POST /messages
+API->>MS: create message
+MS->>DB: store message
+MS->>DB: create MessageRecipients
+MS->>Q: publish event
+
+Q->>D: message event
+D->>U2: push message
+D-->>U3: skip (offline)
+
+U2->>API: ACK delivered
+API->>DB: update status
+
+```
+
+---
+🔄 Part 3 — State Diagram
+Entity: MessageRecipient
+
+```mermaid
+stateDiagram-v2
+[*] --> SENT
+SENT --> DELIVERED
+DELIVERED --> READ
+[*] --> SENT
+SENT --> DELIVERED
+DELIVERED --> READ
+```
+
+---
+📚 Part 4 — ADR
+ADR-001: Separate MessageRecipient for Group Delivery
+Status
+
+Accepted
+
+Context
+
+Group chats require independent delivery tracking per participant.
+
+Decision
+
+Introduce a separate MessageRecipient entity with its own lifecycle state.
+
+Alternatives
+
+Single status in Message (rejected)
+
+Store statuses as JSON in Message (rejected)
+
+Consequences
+
+Independent read tracking
+
+Scales for large groups
+
+Increased schema complexity
+
+🔐 Additional Design: Admin Observer
+Admin Capabilities
+
+Can view all chats
+
+Can view user notes
+
+Not included in read receipts
+
+Cannot send messages
+
+Implementation Principle
+
+Admin is not a ChatParticipant.
+Admin has read-only access through a separate Moderation layer.
 
 # 🖥 Messenger Maks — Local Implementation
 
@@ -129,12 +217,11 @@ The implemented version of Messenger Maks is a simplified local simulation of th
 
 Differences from production architecture:
 
-- No backend server
 - No authentication
 - No database
 - No message queue
 - Instant message delivery
-- All logic runs in browser (JavaScript)
+
 
 Each user is represented by a separate browser window.
 
@@ -149,6 +236,7 @@ The system simulates:
 - User1
 - User2
 - User3
+- -Group Chat
 - Admin
 
 Each user opens the application in a separate window.
@@ -187,3 +275,6 @@ GR-->U1
 GR-->U2
 GR-->U3
 GR-->Admin
+```
+
+---
