@@ -145,7 +145,7 @@ Q->>D: message event
 D->>U2: push message
 D-->>U3: skip (offline)
 
-U2->>API: ACK delivered
+U2->>API: ACK read
 API->>DB: update status
 
 ```
@@ -165,9 +165,7 @@ DELIVERED --> READ
 ```
 
 ---
-📚 Part 4 — ADR
-ADR-001: Separate MessageRecipient for Group Delivery
-Status
+📚 Part 4 —ADR-001: Separate MessageRecipient for Group Delivery Status
 
 Accepted
 
