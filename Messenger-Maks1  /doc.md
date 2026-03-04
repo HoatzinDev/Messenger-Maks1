@@ -98,7 +98,7 @@ AdminClient["Admin Client"]
 
 API["Backend API"]
 MessageService["Message Service"]
-ModerationService["Moderation Service"]
+
 
 Queue["Message Queue"]
 Delivery["Delivery Service (WebSocket Gateway)"]
@@ -113,8 +113,7 @@ Queue --> Delivery
 Delivery --> Client
 
 AdminClient --> API
-API --> ModerationService
-ModerationService --> DB
+
 
 ```
 
