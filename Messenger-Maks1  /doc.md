@@ -189,7 +189,7 @@ Independent read tracking
 Scales for large groups
 
 Increased schema complexity
-Pros of Designed Production Model
+##  Pros of Designed Production Model
 
 Proper separation of concerns
 
@@ -224,7 +224,7 @@ Supports fault tolerance (conceptually)
 Suitable for microservice evolution
 
 
-Cons of Designed but Not Implemented Production Model:
+##  Cons of Designed but Not Implemented Production Model:
 -Not implemented in real infrastructure
 
 -No real message queue configured
@@ -300,14 +300,7 @@ Can view all chats
 
 Can view user notes
 
-Not included in read receipts
-
-Cannot send messages
-
 Implementation Principle
-
-Admin is not a ChatParticipant.
-Admin has read-only access through a separate Moderation layer.
 
 #  Messenger Maks — Local Implementation
 
@@ -378,7 +371,7 @@ GR-->Admin
 ```
 
 ---
-Pros of this architecture:
+##  Pros of this architecture:
 
 - Easy to code
   
@@ -387,7 +380,7 @@ Pros of this architecture:
 - Fast to develop
   
 - Work without wifi conection
-- 
+  
 -Open-source
 
 -Minimal architectural complexity
@@ -420,7 +413,7 @@ Pros of this architecture:
 
 -Demonstrates architectural awareness even in simplified form
 
-#Cons of architecture and realization:
+##  Cons of architecture and realization:
 
 -Can't actually function as messenger
 
@@ -475,7 +468,9 @@ Pros of this architecture:
 -No architectural boundaries
 
 -No separation of concerns
+
 -No test coverage
+
 -No CI/CD
 
 -No deployment model
