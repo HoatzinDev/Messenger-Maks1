@@ -484,3 +484,60 @@ GR-->Admin
 -No message deletion
 
 -No audit trail
+
+<br>
+# Folders📁
+
+API📁
+
+SimpleHttpServer
+
+--Postman
+
+---Post Messege
+
+---Post User
+
+---Get History
+
+Models📁
+
+MessageModel
+
+--Constructor
+
+Services📁
+
+MessageServICe
+
+--SendMessage
+
+--GetAllMessages
+
+--CreateUser
+
+--GetAllUsers
+
+MesseNgeRServER
+
+--Action OnNewMessage
+
+--AllHistory
+
+--Send
+
+Storage📁
+
+JsonStorage
+
+--SaveMessages
+
+--LoadMessages
+
+--SaveUsers
+
+--LoadUsers
+
+TestProject
+
+-UnitTest1
